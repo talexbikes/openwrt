@@ -127,13 +127,6 @@
 		};
 	};
 
-	uart2_pins: uart2-pins {
-		mux {
-			function = "uart";
-			groups = "uart2_0_tx_rx";
-		};
-	};
-
 	pwm_pins: pwm-pins {
 		mux {
 			function = "pwm";
@@ -187,65 +180,65 @@
 			};
 
 			partition@200000 {
-                                reg = <0x200000 0x100000>;
-                                label = "boot-config1";
-                                read-only;
-            };
-
-            partition@300000 {
-                reg = <0x300000 0x100000>;
-                label = "u-boot-env";
-            };
-
-                        partition@400000 {
-                                reg = <0x400000 0x200000>;
-                                label = "FIP0";
-                                read-only;
-                        };
-
-                        partition@600000 {
-                                reg = <0x600000 0x200000>;
-                                label = "FIP1";
-                                read-only;
-                        };
-
-                        partition@800000 {
-                                reg = <0x800000 0x100000>;
-                                label = "oops";
-                        };
-
-                        partition@900000 {
-                                reg = <0x900000 0x2680000>;
-                                label = "ubi";
+				reg = <0x200000 0x100000>;
+				label = "boot-config1";
 				read-only;
-                        };
+	    		};
+
+	    partition@300000 {
+		reg = <0x300000 0x100000>;
+		label = "u-boot-env";
+	    };
+
+	    partition@400000 {
+		reg = <0x400000 0x200000>;
+		label = "FIP0";
+		read-only;
+	    };
+
+	    partition@600000 {
+		reg = <0x600000 0x200000>;
+		label = "FIP1";
+		read-only;
+	    };
+
+	    partition@800000 {
+		reg = <0x800000 0x100000>;
+		label = "oops";
+	    };
+
+	    partition@900000 {
+		reg = <0x900000 0x2680000>;
+		label = "ubi";
+	    };
 
 			partition@2f80000 {
-                reg = <0x2f80000 0x2680000>;
-                label = "ubi1";
+		reg = <0x2f80000 0x2680000>;
+		label = "ubi1";
+		read-only;
 			};
 
 			partition@5600000 {
-                reg = <0x5600000 0x800000>;
-                label = "factory";
+		reg = <0x5600000 0x800000>;
+		label = "factory";
 				read-only;
 			};
 
 			partition@5e00000 {
-                reg = <0x5e00000 0x800000>;
-                label = "runtime_data";
+		reg = <0x5e00000 0x800000>;
+		label = "runtime_data";
 				read-only;
 			};
 
 			partition@6a00000 {
-                reg = <0x6a00000 0x800000>;
-                label = "backup_data";
+		reg = <0x6a00000 0x800000>;
+		label = "backup_data";
 				read-only;
 			};
 
 			partition@7200000 {
-                reg = <0x7200000 0x600000>;
-                label = "backup_backup";
+		reg = <0x7200000 0x600000>;
+		label = "backup_backup";
 				read-only;
 			};
 
@@ -258,21 +251,12 @@
 	status = "okay";
 };
 
-&uart1 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&uart1_pins>;
-	status = "okay";
-};
-
 &watchdog {
 	status = "okay";
 };
 
 &wifi {
-    pinctrl-names = "default", "dbdc";
-    pinctrl-0 = <&wf_2g_5g_pins>;
-    pinctrl-1 = <&wf_dbdc_pins>;
-    status = "okay";
+	status = "okay";
 };
 
 &pcie {
