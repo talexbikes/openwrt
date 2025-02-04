@@ -16,6 +16,9 @@ preinit_mount_cfg_part() {
 	tplink,re6000xd)
 		mount_ubi_part "tp_data"
 		;;
+	tplink,eap653ur-v1)
+		mount_ubi_part "ubi_factory_data"
+		;;
 	*)
 		;;
 	esac

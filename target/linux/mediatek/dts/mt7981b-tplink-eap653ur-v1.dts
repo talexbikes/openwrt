@@ -221,7 +221,7 @@
 
 			partition@5600000 {
 		reg = <0x5600000 0x800000>;
-		label = "factory";
+		label = "ubi_factory_data";
 				read-only;
 			};
 
