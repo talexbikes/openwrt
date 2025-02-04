@@ -38,9 +38,9 @@
 		compatible = "gpio-leds";
 
 		led_sys: led-0 {
-			color = <LED_COLOR_ID_RED>;
+			color = <LED_COLOR_ID_BLUE>;
 			function = LED_FUNCTION_STATUS;
-			gpios = <&pio 9 GPIO_ACTIVE_HIGH>; //TODO
+			gpios = <&pio 35 GPIO_ACTIVE_HIGH>; //TODO
 		};
 
 	};
@@ -140,6 +140,7 @@
 			groups = "pcie_pereset";
 		};
 	};
+	
 };
 
 &spi0 {
@@ -185,16 +186,16 @@
 				read-only;
 	    		};
 
-	    partition@300000 {
-		reg = <0x300000 0x100000>;
-		label = "u-boot-env";
-	    };
+			partition@300000 {
+				reg = <0x300000 0x100000>;
+				label = "u-boot-env";
+			};
 
-	    partition@400000 {
-		reg = <0x400000 0x200000>;
-		label = "FIP0";
-		read-only;
-	    };
+			partition@400000 {
+				reg = <0x400000 0x200000>;
+				label = "FIP0";
+				read-only;
+			};
 
 	    partition@600000 {
 		reg = <0x600000 0x200000>;
@@ -207,12 +208,12 @@
 		label = "oops";
 	    };
 
-	    partition@900000 {
+		partition@900000 {
 		reg = <0x900000 0x2680000>;
 		label = "ubi";
 	    };
 
-			partition@2f80000 {
+		partition@2f80000 {
 		reg = <0x2f80000 0x2680000>;
 		label = "ubi1";
 		read-only;
