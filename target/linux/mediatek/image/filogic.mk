@@ -1429,8 +1429,10 @@ define Device/tplink_eap653ur-v1
   UBINIZE_OPTS := -E 5
   BLOCKSIZE := 128k
   PAGESIZE := 2048
-  IMAGE_SIZE := 51200k
+  IMAGE_SIZE := 39424k
+  IMAGES += factory.bin
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
 endef
 TARGET_DEVICES += tplink_eap653ur-v1
 
