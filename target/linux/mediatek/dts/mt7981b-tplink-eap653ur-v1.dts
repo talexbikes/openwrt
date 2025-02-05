@@ -197,52 +197,51 @@
 				read-only;
 			};
 
-	    partition@600000 {
-		reg = <0x600000 0x200000>;
-		label = "FIP1";
-		read-only;
-	    };
+			partition@600000 {
+				reg = <0x600000 0x200000>;
+				label = "FIP1";
+				read-only;
+			};
 
-	    partition@800000 {
-		reg = <0x800000 0x100000>;
-		label = "oops";
-	    };
+			partition@800000 {
+				reg = <0x800000 0x100000>;
+				label = "oops";
+			};
 
-		partition@900000 {
-		reg = <0x900000 0x2680000>;
-		label = "ubi";
-	    };
+			partition@900000 {
+				reg = <0x900000 0x2680000>;
+				label = "ubi";
+			};
 
-		partition@2f80000 {
-		reg = <0x2f80000 0x2680000>;
-		label = "ubi1";
-		read-only;
+			partition@2f80000 {
+				reg = <0x2f80000 0x2680000>;
+				label = "ubi1";
+				read-only;
 			};
 
 			partition@5600000 {
-		reg = <0x5600000 0x800000>;
-		label = "ubi_factory_data";
+				reg = <0x5600000 0x800000>;
+				label = "ubi_factory_data";
 				read-only;
 			};
 
 			partition@5e00000 {
-		reg = <0x5e00000 0x800000>;
-		label = "runtime_data";
+				reg = <0x5e00000 0x800000>;
+				label = "runtime_data";
 				read-only;
 			};
 
 			partition@6a00000 {
-		reg = <0x6a00000 0x800000>;
-		label = "backup_data";
+				reg = <0x6a00000 0x800000>;
+				label = "backup_data";
 				read-only;
 			};
 
 			partition@7200000 {
-		reg = <0x7200000 0x600000>;
-		label = "backup_backup";
+				reg = <0x7200000 0x600000>;
+				label = "backup_backup";
 				read-only;
 			};
-
 
 		};
 	};
