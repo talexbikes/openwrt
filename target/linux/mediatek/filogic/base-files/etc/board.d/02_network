@@ -168,7 +168,7 @@ mediatek_setup_macs()
 		label_mac=$(get_mac_binary "/tmp/tp_data/default-mac" 0)
 		lan_mac=$label_mac
 		;;
-	tplink,ear653ur-v1)
+	tplink,eap653ur-v1)
 		label_mac=$(get_mac_binary "/tmp/ubi_factory_data/default-mac" 0)
 		lan_mac=$label_mac
 		;;
