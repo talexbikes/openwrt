@@ -1431,8 +1431,12 @@ define Device/tplink_eap653ur-v1
   PAGESIZE := 2048
   IMAGE_SIZE := 39424k
   IMAGES += factory.bin
+  IMAGES += web-ui-factory.bin
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/web-ui-factory.bin := append-ubi | tplink-image-2022
+  TPLINK_SUPPORT_STRING := SupportList: \
+    EAP653 UR(TP-Link|UN|AX3000-D):1.0
 endef
 TARGET_DEVICES += tplink_eap653ur-v1
 
