@@ -151,7 +151,7 @@ def create_image(output_image, root, support):
 
     support_list = {}
     support_list['name'] = 'support-list'
-    support_list['data'] = support.replace(": ", ":\r\n").encode('utf-8')
+    support_list['data'] = support.replace(" ", "\r\n").encode('utf-8')
     support_list['offset'] = header['rootfs_size']
     support_list['size'] = len(support_list['data'])
     header['items'].append(support_list)
