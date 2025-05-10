@@ -1403,9 +1403,11 @@ define Device/genexis_pulse-ex400/common
     --log-lebs=2 --space-fixup --squash-uids
   KERNEL := kernel-bin | lzma | uImage lzma
   KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma | uImage lzma
+ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   IMAGES += factory.bin
   IMAGE/factory.bin := append-image-stage initramfs-kernel.bin | \
 	inteno-bootfs | inteno-y3-header EX400 | append-md5sum-ascii-salted
+endif
   IMAGE/sysupgrade.bin := append-kernel | inteno-bootfs | \
     sysupgrade-tar kernel=$$$$@ | check-size | append-metadata
   DEVICE_IMG_NAME = $$(DEVICE_IMG_PREFIX)-$$(2)
@@ -1984,6 +1986,20 @@ define Device/linksys_re7000
 endef
 TARGET_DEVICES += linksys_re7000
 
+define Device/maginon_mc-1200ac
+  $(Device/dsa-migration)
+  DEVICE_VENDOR := Maginon
+  DEVICE_MODEL := MC-1200AC
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt7615e kmod-mt7663-firmware-ap kmod-usb3 -uboot-envtools
+  KERNEL_LOADADDR := 0x82000000
+  KERNEL := kernel-bin | relocate-kernel $(loadaddr-y) | lzma | \
+	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+  IMAGE/sysupgrade.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | \
+	append-rootfs | pad-rootfs | check-size | append-metadata
+  IMAGE_SIZE := 15552k
+endef
+TARGET_DEVICES += maginon_mc-1200ac
+
 define Device/mediatek_ap-mt7621a-v60
   $(Device/dsa-migration)
   IMAGE_SIZE := 7872k
@@ -2079,6 +2095,18 @@ define Device/mikrotik_routerboard-m33g
   SUPPORTED_DEVICES += mikrotik,rbm33g
 endef
 TARGET_DEVICES += mikrotik_routerboard-m33g
+
+define Device/mofinetwork_mofi5500-5gxelte
+  $(Device/dsa-migration)
+  $(Device/uimage-lzma-loader)
+  IMAGE_SIZE := 27656k
+  DEVICE_VENDOR := MoFi Network
+  DEVICE_MODEL := MOFI5500-5GXeLTE
+  DEVICE_PACKAGES := kmod-usb3 kmod-mmc-mtk kmod-mt7615-firmware \
+	kmod-usb-net-qmi-wwan kmod-usb-net-cdc-mbim
+  SUPPORTED_DEVICES += mofi5500 # Needed in order to flash through Mofi stock firmware
+endef
+TARGET_DEVICES += mofinetwork_mofi5500-5gxelte
 
 define Device/mqmaker_witi
   $(Device/dsa-migration)
@@ -3530,6 +3558,20 @@ define Device/zyxel_lte5398-m904
   KERNEL_INITRAMFS_SUFFIX := -recovery.bin
 endef
 TARGET_DEVICES += zyxel_lte5398-m904
+
+define Device/zyxel_lte7490-m904
+  $(Device/nand)
+  DEVICE_VENDOR := Zyxel
+  DEVICE_MODEL := LTE7490-M904
+  KERNEL_SIZE := 31488k
+  DEVICE_PACKAGES := kmod-mt7603 kmod-usb3 kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi
+  KERNEL := $(KERNEL_DTB) | uImage lzma | \
+	zytrx-header $$(DEVICE_MODEL) $$(VERSION_DIST)-$$(REVISION)
+  KERNEL_INITRAMFS := $(KERNEL_DTB) | uImage lzma | \
+	zytrx-header $$(DEVICE_MODEL) 9.99(ABQY.9)$$(VERSION_DIST)-recovery
+  KERNEL_INITRAMFS_SUFFIX := -recovery.bin
+endef
+TARGET_DEVICES += zyxel_lte7490-m904
 
 define Device/zyxel_nr7101
   $(Device/nand)
