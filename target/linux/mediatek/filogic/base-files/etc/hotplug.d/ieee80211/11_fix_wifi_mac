@@ -1,6 +1,9 @@
+logger -t hotplug $(PHYNBR)
 [ "$ACTION" == "add" ] || exit 0
 
 PHYNBR=${DEVPATH##*/phy}
+
+logger -t hotplug $(PHYNBR)
 
 [ -n $PHYNBR ] || exit 0
 
