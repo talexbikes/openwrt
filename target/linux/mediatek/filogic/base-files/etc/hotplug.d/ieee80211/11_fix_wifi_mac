@@ -1,9 +1,6 @@
-logger -t hotplug $(PHYNBR)
 [ "$ACTION" == "add" ] || exit 0
 
 PHYNBR=${DEVPATH##*/phy}
-
-logger -t hotplug $(PHYNBR)
 
 [ -n $PHYNBR ] || exit 0
 
@@ -11,8 +8,6 @@ logger -t hotplug $(PHYNBR)
 . /lib/functions/system.sh
 
 board=$(board_name)
-
-logger -t hotplug $(PHYNBR)
 
 case "$board" in
 	abt,asr3000)
@@ -138,7 +133,7 @@ case "$board" in
 		[ "$PHYNBR" = "1" ] && macaddr_add $addr -1 > /sys${DEVPATH}/macaddress
 		;;
 	tplink,eap653ur-v1)
-		addr=$(get_mac_binary "/tmp/ubi_factory_/default-mac" 0)
+		addr=$(get_mac_binary "/tmp/ubi_factory_data/default-mac" 0)
 		macaddr_add "$addr" "$PHYNBR" > "/sys${DEVPATH}/macaddress"
 		;;
 	netgear,wax220)
