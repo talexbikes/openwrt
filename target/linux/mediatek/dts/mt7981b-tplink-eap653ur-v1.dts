@@ -55,8 +55,6 @@
 		reg = <1>;
 		phy-mode = "gmii";
 		phy-handle = <&int_gbe_phy>;
-		nvmem-cells = <&macaddr_factory_4 0>;
-		nvmem-cell-names = "mac-address";
 	};
 };
 
@@ -225,17 +223,6 @@
 				reg = <0x5600000 0x800000>;
 				label = "ubi_factory_data";
 				read-only;
-				nvmem-layout {
-					compatible = "fixed-layout";
-					#address-cells = <1>;
-					#size-cells = <1>;
-					
-					macaddr_factory_4: macaddr@4 {
-						compatible = "default-mac";
-						reg = <0x4 0x6>;
-						#nvmem-cell-cells = <1>;
-					};
-				};
 			};
 
 			partition@5e00000 {
